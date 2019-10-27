@@ -10,7 +10,11 @@ class SearchBar extends React.Component {
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
-          <input type="text" id="titleInput"></input>
+          <input
+            type="text"
+            placeholder="Search by Title..."
+            id="titleInput"
+          ></input>
         </form>
       </div>
     );
