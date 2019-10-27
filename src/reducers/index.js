@@ -1,13 +1,13 @@
 const initialState = {
-    search = ''
+  search: ""
 };
 
 export default (state = initialState, action) => {
-    switch(action.type){
-        case 'SEARCH_MOVIE':
-            console.log(action.payload)
-            return state
-        default:
-            return state
-    }
-}
+  switch (action.type) {
+    case "SEARCH_MOVIE":
+      console.log(action.payload);
+      return state;
+    default:
+      return state;
+  }
+};
