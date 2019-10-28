@@ -1,14 +1,30 @@
 import React from "react";
-import SearchBar from "./SearchBar";
+import { SearchBarContainer } from "./SearchBar";
 import FetchAPI from "./FetchAPI";
+import { connect } from "react-redux";
+import { moviesFetched } from "../actions";
 
-const App = () => {
-  return (
-    <div>
-      <SearchBar />
-      <FetchAPI />
-    </div>
-  );
+export class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <SearchBarContainer />
+        <FetchAPI />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    search: state.search,
+    movies: state.movies
+  };
 };
 
-export default App;
+const mapDispatchToProps = { moviesFetched };
+
+export const AppContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

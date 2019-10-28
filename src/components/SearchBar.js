@@ -1,10 +1,14 @@
 import React from "react";
+import { searchMovie } from "../actions";
+import { connect } from "react-redux";
 
 class SearchBar extends React.Component {
-  onFormSubmit(event) {
+  state = { searchValue: "" };
+
+  onFormSubmit = event => {
     event.preventDefault();
-    console.log(document.getElementById("titleInput").value);
-  }
+    this.props.searchMovie(this.state.searchValue);
+  };
 
   render() {
     return (
@@ -13,7 +17,8 @@ class SearchBar extends React.Component {
           <input
             type="text"
             placeholder="Search by Title..."
-            id="titleInput"
+            value={this.state.searchValue}
+            onChange={e => this.setState({ searchValue: e.target.value })}
           ></input>
         </form>
       </div>
@@ -21,4 +26,15 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+const mapStateToProps = state => {
+  return {
+    search: state.search
+  };
+};
+
+const mapDispatchToProps = { searchMovie };
+
+export const SearchBarContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchBar);
