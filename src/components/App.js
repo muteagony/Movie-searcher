@@ -5,7 +5,24 @@ import { connect } from "react-redux";
 import { fetchMoviesSuccess } from "../actions";
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    const { fetchMovies } = this.props;
+    fetchMovies();
+  }
+
+  shouldComponentRender() {
+    const { pending } = this.props;
+    if (this.pending === false) return false;
+    return true;
+  }
+
   render() {
+    const { movies, error, pending } = this.props;
+    if (!this.shouldComponentRender()) return <SearchBarContainer />;
     return (
       <div>
         <SearchBarContainer />
