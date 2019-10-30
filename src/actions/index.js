@@ -5,9 +5,22 @@ export const searchMovie = data => {
   };
 };
 
-export const moviesFetched = movies => {
+export const fetchMoviesSuccess = movies => {
   return {
-    type: "FETCH_MOVIES",
-    payload: movies
+    type: "FETCH_MOVIES_SUCCESS",
+    movies: movies
+  };
+};
+
+export const fetchMoviesError = error => {
+  return {
+    type: "FETCH_MOVIES_ERROR",
+    error: error
+  };
+};
+
+export const fetchMoviesPending = () => {
+  return {
+    type: "FETCH_MOVIES_PENDING"
   };
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { SearchBarContainer } from "./SearchBar";
 import FetchAPI from "./FetchAPI";
 import { connect } from "react-redux";
-import { moviesFetched } from "../actions";
+import { fetchMoviesSuccess } from "../actions";
 
 export class App extends React.Component {
   render() {
@@ -22,7 +22,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = { moviesFetched };
+const mapDispatchToProps = { fetchMoviesSuccess };
 
 export const AppContainer = connect(
   mapStateToProps,
