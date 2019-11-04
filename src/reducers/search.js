@@ -1,9 +1,3 @@
-const initialState = {
-  pending: false,
-  movies: [],
-  error: null
-};
-
 export const search = (state = "", action) => {
   switch (action.type) {
     case "FETCH_MOVIES_SUCCESS":

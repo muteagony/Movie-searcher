@@ -1,19 +1,19 @@
 import React from "react";
-import { SearchBarContainer } from "./SearchBar";
-import MovieList from "./MovieList";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import {
-  getMovies,
   getMoviesError,
+  getMovies,
   getMoviesPending
 } from "../reducers/search";
 import fetchMoviesAction from "./Fetch";
 
-export class App extends React.Component {
+class MovieList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.shouldComponentRender = this.shouldComponentRender.bind(this);
   }
 
   componentWillMount() {
@@ -27,24 +27,24 @@ export class App extends React.Component {
   }
 
   render() {
-    const { movies } = this.props;
-    if (!this.shouldComponentRender()) return <SearchBarContainer />;
+    const { movies, error } = this.props;
+
+    if (!this.shouldComponentRender())
+      return <div>You should definitely search for some movie</div>;
     return (
       <div>
-        <SearchBarContainer />
-        <MovieList movies={movies} />
+        {error}
+        {movies}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    error: getMoviesError(state),
-    movies: getMovies(state),
-    pending: getMoviesPending(state)
-  };
-};
+const mapStateToProps = state => ({
+  error: getMoviesError(state),
+  movies: getMovies(state),
+  pending: getMoviesPending(state)
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
@@ -54,7 +54,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export const AppContainer = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(MovieList);
